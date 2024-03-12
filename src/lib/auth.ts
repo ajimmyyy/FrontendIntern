@@ -4,6 +4,7 @@ import GithubProvider from 'next-auth/providers/github';
 export const AuthOptions: NextAuthOptions = {
   session: {
     strategy: "jwt",
+    maxAge: 12 * 60 * 60,
   },
   secret: process.env.NEXTAUTH_SECRET,
   providers: [
@@ -18,9 +19,6 @@ export const AuthOptions: NextAuthOptions = {
         return true;
       }
       return false;
-    },
-    async redirect({ url, baseUrl }) {
-      return `${baseUrl}/user`;
     },
     async jwt({ token, account}) {
       if (account) {

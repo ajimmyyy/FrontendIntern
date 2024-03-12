@@ -10,6 +10,7 @@ import {
 } from "@material-tailwind/react";
 import Login from "@/components/logIn";
 import Logout from "@/components/logOut";
+import Edit from "@/components/edit";
 
 export default function Header() {
   const { data: session, status } = useSession()
@@ -25,11 +26,11 @@ export default function Header() {
         <Typography
           placeholder
           as="a"
-          href="#"
+          href="/home"
           variant="h6"
           className="mr-4 ml-2 cursor-pointer py-1.5"
         >
-          Material Tailwind
+          我的部落格
         </Typography>
         <div className="relative flex w-full gap-2 md:w-max">
           <Input
@@ -52,7 +53,12 @@ export default function Header() {
           </Button>
         </div>
         <div className="flex gap-1 md:mr-4">
-          {session ? <Logout /> : <Login />}
+          {session ? 
+          <div className="flex gap-5">
+            <Edit />
+            <Logout />
+          </div>
+           : <Login />}
         </div>
       </div>
     </Navbar>

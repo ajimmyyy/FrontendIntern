@@ -10,7 +10,7 @@ export default function Login() {
           variant="outlined"
           size="sm"
           color="white"
-          onClick={() => signOut()}
+          onClick={() => signOut({redirect: true, callbackUrl: "/home"})}
           className="hidden lg:inline-block"
         >
           <span>Sign out</span>

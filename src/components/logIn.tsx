@@ -10,7 +10,7 @@ export default function Login() {
           variant="outlined"
           size="sm"
           color="white"
-          onClick={() => signIn()}
+          onClick={() => signIn("credentials", {redirect: true, callbackUrl: "/user"})}
           className="hidden lg:inline-block"
         >
           <span>Sign in</span>

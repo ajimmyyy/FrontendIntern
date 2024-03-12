@@ -11,6 +11,7 @@ export const AuthOptions: NextAuthOptions = {
     GithubProvider({
       clientId: process.env.CLIENT_ID ?? '',
       clientSecret: process.env.CLIENT_SECRET ?? '',
+      authorization: {params: {scope: 'read:user%20read:project'}}
     }),
   ],
   callbacks: {

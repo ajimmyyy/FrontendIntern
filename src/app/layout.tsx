@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Main from "@/components/main";
 import Header from "@/components/header";
-import NextAuthProvider from "@/app/nextAuthProvider";
+import NextAuthProvider from "@/components/nextAuthProvider";
+import ApolloProviderWrapper from "@/components/apolloProvider";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -18,8 +19,10 @@ export default function RootLayout({
     <html lang="en">
       <body className=" bg-[#f5f5f5]">
         <NextAuthProvider>
-          <Header />
-          <Main>{children}</Main>
+          <ApolloProviderWrapper>
+            <Header />
+            <Main>{children}</Main>
+          </ApolloProviderWrapper>
         </NextAuthProvider>
       </body>
     </html>

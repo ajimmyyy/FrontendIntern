@@ -6,7 +6,7 @@ export default function Edit() {
   const router = useRouter();
   return (
     <Button
-      placeholder
+      placeholder = ""
       color="white"
       className="!rounded"
       onClick={() => {router.push("/user")}

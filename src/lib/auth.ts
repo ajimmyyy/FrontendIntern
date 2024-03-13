@@ -11,7 +11,7 @@ export const AuthOptions: NextAuthOptions = {
     GithubProvider({
       clientId: process.env.CLIENT_ID ?? '',
       clientSecret: process.env.CLIENT_SECRET ?? '',
-      authorization: {params: {scope: 'read:user%20read:project'}}
+      authorization: {params: {scope: 'read:user'}}
     }),
   ],
   callbacks: {
@@ -27,6 +27,10 @@ export const AuthOptions: NextAuthOptions = {
         token.idToken = account.id_token
       }
       return token
-    }
+    },
+    async session({ session, token, user }) {
+      session.user.accessToken = token.accessToken as string;
+      return session;
+    },
   }
 }

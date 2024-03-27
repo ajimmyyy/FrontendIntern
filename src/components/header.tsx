@@ -11,7 +11,7 @@ import {
 import { MdHome } from "react-icons/md";
 import Login from "@/components/logIn";
 import Logout from "@/components/logOut";
-import Edit from "@/components/edit";
+import Profile from "@/components/profile";
 
 export default function Header() {
   const { data: session, status } = useSession()
@@ -70,7 +70,7 @@ export default function Header() {
           <div className="flex gap-1 md:mr-4">
             {session ?
               <div className="flex gap-5">
-                <Edit />
+                <Profile />
                 <Logout />
               </div>
               : <Login />}

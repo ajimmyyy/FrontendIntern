@@ -8,9 +8,9 @@ export default function Login() {
       <Button
           placeholder = ""
           variant="outlined"
-          size="sm"
+          size="md"
           color="white"
-          onClick={() => signIn("credentials", {redirect: true, callbackUrl: "/edit"})}
+          onClick={() => signIn("credentials", {redirect: true, callbackUrl: "/home"})}
           className="hidden lg:inline-block"
         >
           <span>Sign in</span>

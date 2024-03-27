@@ -1,6 +1,6 @@
 "use client";
 import { useFetchIssues } from "@/hooks/useIssues";
-import CardItem from "@/components/user/card-item";
+import CardItem from "@/components/issue/card-item";
 
 export default function Home() {
   const repoOwner = process.env.OWNER_NAME as string;

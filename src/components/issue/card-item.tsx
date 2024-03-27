@@ -14,13 +14,13 @@ export default function CardItem({issue}: {issue : IssueInfo}) {
         <Typography placeholder="" variant="h5" color="blue-gray" className="mb-2">
           {issue.title}
         </Typography>
-        <Typography placeholder="" className="line-clamp-3">
+        <Typography placeholder="" className=" whitespace-pre-line">
           {issue.body}
         </Typography>
       </CardBody>
       <CardFooter placeholder="" className="pt-0">
         <a href="#" className="inline-block">
-          <Button placeholder="" size="sm" variant="text" className="flex items-center gap-2">
+          <Button placeholder="" size="sm" variant="text" className="flex items-center gap-2 text-gray-500">
             Learn More
             <svg
               xmlns="http://www.w3.org/2000/svg"

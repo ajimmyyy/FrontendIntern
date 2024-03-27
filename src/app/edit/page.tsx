@@ -2,7 +2,7 @@
 import { getSession } from "next-auth/react";
 import { useState, useEffect } from "react";
 import { useFetchIssues } from "@/hooks/useIssues";
-import CardItem from "@/components/user/card-item";
+import CardItem from "@/components/issue/card-item";
 import { Badge } from "@material-tailwind/react";
 
 export default function User() {

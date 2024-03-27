@@ -6,7 +6,7 @@ export default function Login() {
   return (
     <>
       <Button
-          placeholder
+          placeholder = ""
           variant="outlined"
           size="sm"
           color="white"

@@ -6,14 +6,10 @@ import {
   MenuItem,
   Avatar,
   Typography,
-  Card,
-  CardBody,
 } from "@material-tailwind/react";
-import { useRouter } from "next/navigation";
 import { useFetchUser } from "@/hooks/useUser";
 
 export default function Profile() {
-  const router = useRouter();
   const user = useFetchUser();
 
   return (

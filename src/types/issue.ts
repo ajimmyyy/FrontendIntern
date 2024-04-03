@@ -1,5 +1,5 @@
 export type IssueInfo = {
-  id: number;
+  number: number;
   state: string;
   comments_url: string;
   title: string;

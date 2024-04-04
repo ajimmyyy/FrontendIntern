@@ -2,7 +2,6 @@
 import { useEffect } from "react";
 import { useSearchParams } from 'next/navigation';
 import { useRouter } from "next/navigation";
-import { useFetchIssues } from "@/hooks/useIssues";
 import { useFetchComment } from "@/hooks/useComment"; 
 import CommentList from "@/components/issue/comment-list";
 

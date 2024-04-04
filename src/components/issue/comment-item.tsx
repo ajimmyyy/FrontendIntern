@@ -8,7 +8,7 @@ import {
   PopoverContent,
 } from "@material-tailwind/react";
 import { CommentInfo } from "@/types/comment";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import ReactMarkdown from "react-markdown";
 
 export default function CommentItem({ comment }: { comment: CommentInfo }) {
@@ -44,11 +44,9 @@ export default function CommentItem({ comment }: { comment: CommentInfo }) {
       </Popover>
       <Card key={comment.id} placeholder="" className="mt-6 w-full">
         <CardBody placeholder="">
-          <Typography placeholder="" className="whitespace-normal">
-            <ReactMarkdown className="prose">
-              {comment.body}
-            </ReactMarkdown>
-          </Typography>
+          <ReactMarkdown className="prose">
+            {comment.body}
+          </ReactMarkdown>
         </CardBody>
       </Card>
     </div>

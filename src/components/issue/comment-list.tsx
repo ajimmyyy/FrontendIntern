@@ -1,7 +1,6 @@
 import {
   Card,
   CardBody,
-  Typography,
 } from "@material-tailwind/react";
 import { IssueInfo } from "@/types/issue";
 import { CommentInfo } from "@/types/comment";
@@ -13,17 +12,15 @@ export default function CommentList({ issue, comments }: { issue: IssueInfo, com
     <>
       <Card placeholder="" className="mt-6 w-2/3">
           <CardBody placeholder="">
-            <Typography placeholder="" className="whitespace-normal">
-              <ReactMarkdown className="prose">
-                {issue.body}
-              </ReactMarkdown>
-            </Typography>
+            <ReactMarkdown className="prose">
+              {issue.body}
+            </ReactMarkdown>
           </CardBody>
         </Card>
       {
-        comments.map((comment) => {
-          return CommentItem({ comment });
-        })
+        comments.map((comment) => (
+          <CommentItem comment={comment} key={comment.id}/>
+        ))
       }
     </>
   );

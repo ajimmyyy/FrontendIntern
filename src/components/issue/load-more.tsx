@@ -11,7 +11,7 @@ export default function LoadMore() {
   const [pagesLoaded, setPagesLoaded] = useState<number>(1);
   const [reachedEnd, setReachedEnd] = useState<boolean>(false);
   const { ref, inView } = useInView();
-
+  
   const loadMoreIssues = async () => {
     if (reachedEnd) return;
     const nextPage = pagesLoaded + 1;

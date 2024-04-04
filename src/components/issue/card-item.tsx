@@ -30,11 +30,9 @@ export default function CardItem({ issue }: { issue: IssueInfo }) {
         <Typography placeholder="" variant="h5" color="blue-gray" className="mb-2">
           {issue.title}
         </Typography>
-        <Typography placeholder="" className="whitespace-normal">
-          <ReactMarkdown className="prose">
-            { limitTextLines(issue.body, LIMIT_LINE_NUM) }
-          </ReactMarkdown>
-        </Typography>
+        <ReactMarkdown className="prose">
+          { limitTextLines(issue.body, LIMIT_LINE_NUM) }
+        </ReactMarkdown>
       </CardBody>
       <CardFooter placeholder="" className="pt-0">
         <Button 

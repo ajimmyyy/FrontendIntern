@@ -1,10 +1,23 @@
 "use client";
 import { useFetchIssues } from "@/hooks/useIssues";
 import CardItem from "@/components/issue/card-item";
+import { useEffect, useRef, useState } from "react";
 
 export default function Home() {
-  const repoOwner = process.env.OWNER_NAME as string;
-  const { issues, loading } = useFetchIssues();
+  const [page, setPage] = useState<number>(0);
+  const endOfListRef = useRef<HTMLDivElement>(null);
+  const { issues, loading } = useFetchIssues(page);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (endOfListRef.current && window.innerHeight + window.scrollY >= endOfListRef.current.offsetTop) {
+        setPage(prevPage => prevPage + 1);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
     <>
@@ -13,9 +26,10 @@ export default function Home() {
           <p>Loading...</p>
         ) : (
           issues.map((issue) => (
-            <CardItem issue={issue} />
+            <CardItem issue={issue}/>
           ))
         )}
+        <div ref={endOfListRef} />
       </div>
     </>
   );

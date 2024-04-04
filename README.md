@@ -1,6 +1,16 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
+adding .env
+include:
+```
+CLIENT_ID = client ID from GitHub OAuth apps
+CLIENT_SECRET = client secrets from GitHub OAuth apps
+HOST = homepage URL
+NEXTAUTH_SECRET = create a good value by command `openssl rand -base64 32`
+NEXT_PUBLIC_OWNER_NAME = ower's GitHub name
+NEXT_PUBLIC_REPO_NAME = the project that issues come from
+```
 
 First, run the development server:
 

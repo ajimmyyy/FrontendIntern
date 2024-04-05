@@ -1,16 +1,23 @@
+"use client"
 import {
   Card,
   CardBody,
   CardFooter,
   Typography,
   Button,
+  Tooltip,
 } from "@material-tailwind/react";
+import { CloseIssue } from "@/actions/close-issue";
 import { IssueInfo } from "@/types/issue";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
+import { SlTrash } from "react-icons/sl";
 import ReactMarkdown from "react-markdown";
+import CloseButton from "./close-button";
 
 export default function CardItem({ issue }: { issue: IssueInfo }) {
   const router = useRouter();
+  const { data: session, status } = useSession()
   const LIMIT_LINE_NUM = 8;
 
   function limitTextLines(text: string, limit: number) {
@@ -31,15 +38,15 @@ export default function CardItem({ issue }: { issue: IssueInfo }) {
           {issue.title}
         </Typography>
         <ReactMarkdown className="prose">
-          { limitTextLines(issue.body, LIMIT_LINE_NUM) }
+          {limitTextLines(issue.body, LIMIT_LINE_NUM)}
         </ReactMarkdown>
       </CardBody>
-      <CardFooter placeholder="" className="pt-0">
-        <Button 
-          placeholder="" 
-          size="sm" 
-          variant="text" 
-          className="flex items-center gap-2 text-gray-500" 
+      <CardFooter placeholder="" className="flex pt-0 justify-between">
+        <Button
+          placeholder=""
+          size="sm"
+          variant="text"
+          className="flex items-center gap-2 text-gray-500"
           onClick={() => router.push(`home/issue?number=${issue.number}`)}
         >
           Learn More
@@ -58,6 +65,20 @@ export default function CardItem({ issue }: { issue: IssueInfo }) {
             />
           </svg>
         </Button>
+        {session ? 
+          // <Tooltip 
+          //   content="delete article" 
+          // >
+          //   <span 
+          //     className="cursor-pointer rounded-full border border-gray-900/5 bg-gray-900/5 p-3 text-gray-900 transition-colors hover:border-red-500/30 hover:bg-red-500/30 hover:!opacity-100 group-hover:opacity-70" 
+          //     onClick={async() => await CloseIssue(issue.number)}
+          //   >
+          //     <SlTrash />
+          //   </span>
+          // </Tooltip>
+          <CloseButton issueNumber={issue.number} />
+          : null
+        }
       </CardFooter>
     </Card>
   );

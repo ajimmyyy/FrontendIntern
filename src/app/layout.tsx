@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Toaster } from "sonner";
 import Main from "@/components/main";
 import Header from "@/components/header";
 import NextAuthProvider from "@/app/nextAuthProvider";
@@ -20,6 +21,7 @@ export default function RootLayout({
         <NextAuthProvider>
           <Header />
           <Main>{children}</Main>
+          <Toaster position="bottom-left" richColors closeButton />
         </NextAuthProvider>
       </body>
     </html>

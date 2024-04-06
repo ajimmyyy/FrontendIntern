@@ -1,19 +1,16 @@
 "use client"
 import {
+  Button,
   Card,
   CardBody,
   CardFooter,
   Typography,
-  Button,
-  Tooltip,
 } from "@material-tailwind/react";
-import { CloseIssue } from "@/actions/close-issue";
 import { IssueInfo } from "@/types/issue";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
-import { SlTrash } from "react-icons/sl";
 import ReactMarkdown from "react-markdown";
-import CloseButton from "./close-button";
+import CloseButton from "@/components/issue/close-button";
 
 export default function CardItem({ issue }: { issue: IssueInfo }) {
   const router = useRouter();
@@ -65,20 +62,7 @@ export default function CardItem({ issue }: { issue: IssueInfo }) {
             />
           </svg>
         </Button>
-        {session ? 
-          // <Tooltip 
-          //   content="delete article" 
-          // >
-          //   <span 
-          //     className="cursor-pointer rounded-full border border-gray-900/5 bg-gray-900/5 p-3 text-gray-900 transition-colors hover:border-red-500/30 hover:bg-red-500/30 hover:!opacity-100 group-hover:opacity-70" 
-          //     onClick={async() => await CloseIssue(issue.number)}
-          //   >
-          //     <SlTrash />
-          //   </span>
-          // </Tooltip>
-          <CloseButton issueNumber={issue.number} />
-          : null
-        }
+        {session && <CloseButton issueNumber={issue.number} />}
       </CardFooter>
     </Card>
   );

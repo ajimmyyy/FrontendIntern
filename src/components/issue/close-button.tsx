@@ -1,4 +1,5 @@
 import {
+  Alert,
   Button,
   Dialog,
   DialogHeader,
@@ -10,11 +11,18 @@ import {
 import { CloseIssue } from "@/actions/close-issue";
 import { SlTrash } from "react-icons/sl";
 import { useState } from "react";
-
+import { toast } from "sonner";
 
 export default function CloseButton({issueNumber}: {issueNumber: number}) {
   const [open, setOpen] = useState(false);
+
   const handleOpen = () => setOpen(!open);
+  const handleIssueClose = () => {
+    CloseIssue(issueNumber);
+    setOpen(false);
+    toast.success('Issue closed successfully');
+  };
+  
   return (
     <Tooltip
       content="delete article"
@@ -23,7 +31,7 @@ export default function CloseButton({issueNumber}: {issueNumber: number}) {
         <Button 
           placeholder=""
           color="red"
-          className="flex rounded-full gap-1"
+          className="flex rounded-full gap-1 w-25 h-10"
           onClick={handleOpen}
         >
           <SlTrash size={15}/>
@@ -45,10 +53,7 @@ export default function CloseButton({issueNumber}: {issueNumber: number}) {
             <Button
               placeholder=""
               variant="gradient"
-              onClick={() =>{
-                CloseIssue(issueNumber)
-                setOpen(!open);
-              }}
+              onClick={handleIssueClose}
             >
               Ok, Close it
             </Button>

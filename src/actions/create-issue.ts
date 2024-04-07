@@ -1,5 +1,4 @@
 import { getSession } from "next-auth/react";
-import { IssueInfo } from "@/types/issue";
 
 export async function CreateIssues (title: string, body: string){
   const repoOwner = process.env.NEXT_PUBLIC_OWNER_NAME || "";

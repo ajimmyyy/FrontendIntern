@@ -8,7 +8,7 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { CreateIssues } from "@/actions/create-issue";
 
-export default function AddButton() {
+export default function AddButton({onAdd}: {onAdd: (value: boolean) => void}) {
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => setOpen(!open);
@@ -20,6 +20,7 @@ export default function AddButton() {
 
     try {
       await CreateIssues(title, body);
+      onAdd(true);
       toast.success('Issue created successfully');
       handleOpen();
     } catch (error) {
@@ -34,7 +35,7 @@ export default function AddButton() {
     >
       <>
         <IconButton
-          placeholder
+          placeholder=""
           variant="outlined"
           className="rounded-full"
           color="white"
@@ -42,7 +43,7 @@ export default function AddButton() {
         >
           <MdOutlineAdd size={40} />
         </IconButton>
-        <IssueDialog open={open} handleOpen={handleOpen} handleSave={handleSave}/>
+        <IssueDialog open={open} handleOpen={handleOpen} handleSave={handleSave} defaultBody="" defaultTitle=""/>
       </>
     </Tooltip>
   );

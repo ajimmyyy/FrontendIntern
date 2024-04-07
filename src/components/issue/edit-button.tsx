@@ -8,7 +8,7 @@ import { MdEdit } from "react-icons/md";
 import { useState } from "react";
 import { toast } from "sonner";
 
-export default function EditButton({ issueNumber, title, body }: { issueNumber: number, title: string, body: string}) {
+export default function EditButton({ issueNumber, title, body, onEdit }: { issueNumber: number, title: string, body: string, onEdit: (value: boolean) => void }){
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => setOpen(!open);
@@ -20,6 +20,7 @@ export default function EditButton({ issueNumber, title, body }: { issueNumber: 
 
     try {
       await EditIssue(issueNumber, title, body);
+      onEdit(true);
       toast.success('Issue created successfully');
       handleOpen();
     } catch (error) {

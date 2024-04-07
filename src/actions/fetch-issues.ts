@@ -16,11 +16,13 @@ export async function FetchIssues (page: number, perPage: number = 10){
     );
 
     if (!response.ok) {
+      toast.error("Failed to fetch issues");
       throw new Error("Failed to fetch issues");
     }
     const issuesData: IssueInfo[] = await response.json();
     return issuesData;
   } catch (error) {
+    toast.error("Failed to fetch issues");
     console.error("Error fetching GitHub issues:", error);
     return [];
   }

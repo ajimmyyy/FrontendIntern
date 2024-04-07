@@ -1,5 +1,4 @@
 import { IssueInfo } from "@/types/issue";
-import { getSession } from "next-auth/react";
 
 export async function FetchIssues (page: number, perPage: number = 10){
   const repoOwner = process.env.NEXT_PUBLIC_OWNER_NAME || "";

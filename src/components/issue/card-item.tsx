@@ -1,16 +1,22 @@
+"use client"
 import {
+  Button,
   Card,
   CardBody,
   CardFooter,
   Typography,
-  Button,
 } from "@material-tailwind/react";
 import { IssueInfo } from "@/types/issue";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 import ReactMarkdown from "react-markdown";
+import CloseButton from "@/components/issue/close-button";
+import { useState } from "react";
 
 export default function CardItem({ issue }: { issue: IssueInfo }) {
   const router = useRouter();
+  const { data: session, status } = useSession()
+  const [closeIssue, setCloseIssue] = useState(false);
   const LIMIT_LINE_NUM = 8;
 
   function limitTextLines(text: string, limit: number) {
@@ -24,6 +30,10 @@ export default function CardItem({ issue }: { issue: IssueInfo }) {
     }
   }
 
+  if (closeIssue) {
+    return null;
+  }
+
   return (
     <Card placeholder="" className="mt-6 w-2/3">
       <CardBody placeholder="">
@@ -31,15 +41,15 @@ export default function CardItem({ issue }: { issue: IssueInfo }) {
           {issue.title}
         </Typography>
         <ReactMarkdown className="prose">
-          { limitTextLines(issue.body, LIMIT_LINE_NUM) }
+          {limitTextLines(issue.body, LIMIT_LINE_NUM)}
         </ReactMarkdown>
       </CardBody>
-      <CardFooter placeholder="" className="pt-0">
-        <Button 
-          placeholder="" 
-          size="sm" 
-          variant="text" 
-          className="flex items-center gap-2 text-gray-500" 
+      <CardFooter placeholder="" className="flex pt-0 justify-between">
+        <Button
+          placeholder=""
+          size="sm"
+          variant="text"
+          className="flex items-center gap-2 text-gray-500"
           onClick={() => router.push(`home/issue?number=${issue.number}`)}
         >
           Learn More
@@ -58,6 +68,7 @@ export default function CardItem({ issue }: { issue: IssueInfo }) {
             />
           </svg>
         </Button>
+        {session && <CloseButton issueNumber={issue.number} setIssueClose={setCloseIssue} />}
       </CardFooter>
     </Card>
   );

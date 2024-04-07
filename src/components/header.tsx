@@ -1,33 +1,18 @@
 "use client";
-import { useSelectedLayoutSegments } from "next/navigation";
 import { useSession } from "next-auth/react"
 import {
   Navbar,
   Typography,
   Button,
   Input,
-  Breadcrumbs,
 } from "@material-tailwind/react";
-import { MdHome } from "react-icons/md";
 import Login from "@/components/logIn";
 import Logout from "@/components/logOut";
 import Profile from "@/components/profile";
+import BreadCrumbs from "./breadCrumbs";
 
 export default function Header() {
   const { data: session, status } = useSession()
-  const segments = useSelectedLayoutSegments();
-
-  const breadcrumbs: {
-    label: string;
-    path: string;
-  }[] = [
-    ...segments.map((segment) => {
-      const pathSegments = segments.slice(0, segments.indexOf(segment) + 1);
-      const label = segment;
-      const path = `/${pathSegments.join("/")}`;
-      return { label, path };
-    }),
-  ].filter((breadcrumb) => breadcrumb.label !== "");
 
   return (
     <>
@@ -79,16 +64,7 @@ export default function Header() {
       </Navbar>
       <div className="flex w-full justify-center">
         <div className="container">
-          <Breadcrumbs placeholder={undefined}>
-            <a key={0} href="/home" className="opacity-60">
-              <MdHome />
-            </a>
-            {breadcrumbs.map((breadcrumb, index) => (
-              <a key={index} href={breadcrumb.path} className="opacity-60">
-                {breadcrumb.label}
-              </a>
-            ))}
-          </Breadcrumbs>
+          <BreadCrumbs />
         </div>
       </div>
     </>

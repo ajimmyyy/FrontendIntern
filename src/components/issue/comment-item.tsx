@@ -19,7 +19,7 @@ export default function CommentItem({ comment }: { comment: CommentInfo }) {
   };
 
   return (
-    <div className="inline-flex gap-2 w-2/3">
+    <div className="inline-flex gap-2 w-full">
       <Popover open={openPopover} handler={setOpenPopover}>
         <PopoverHandler {...triggers}>
           <Avatar

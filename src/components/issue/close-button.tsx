@@ -32,7 +32,7 @@ export default function CloseButton({issueNumber, setIssueClose}: {issueNumber: 
         <Button 
           placeholder=""
           color="red"
-          className="flex items-center justify-center rounded-full gap-1 h-10"
+          className="flex items-center justify-center rounded-full gap-1 h-7"
           onClick={handleOpen}
         >
           <SlTrash size={15}/>

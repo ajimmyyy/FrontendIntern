@@ -3,7 +3,6 @@ import {
   Menu,
   MenuHandler,
   MenuList,
-  MenuItem,
   Button,
 } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
@@ -50,13 +49,18 @@ export default function Issue() {
                 mount: { y: 0 },
                 unmount: { y: 25 },
               }}
+              placement="bottom-start"
             >
               <MenuHandler>
-                <Button placeholder="" variant="text" color="light-blue">
-                  <MdOutlineSettings size={20}/>
+                <Button placeholder="" variant="text" color="blue-gray" className="rounded-full">
+                  <MdOutlineSettings size={40}/>
                 </Button>
               </MenuHandler>
-              <MenuList placeholder="">
+              <MenuList placeholder="" className="flex flex-col justify-center space-y-2">
+                <CloseButton 
+                    issueNumber={comment.issue.number}
+                    setIssueClose={setCloseIssue}
+                />
                 <CloseButton 
                     issueNumber={comment.issue.number}
                     setIssueClose={setCloseIssue}

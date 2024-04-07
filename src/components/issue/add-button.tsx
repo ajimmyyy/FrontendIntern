@@ -6,37 +6,30 @@ import {
   DialogFooter,
   Typography,
   Tooltip,
+  IconButton,
 } from "@material-tailwind/react";
-import { CloseIssue } from "@/actions/close-issue";
-import { SlTrash } from "react-icons/sl";
+import { MdOutlineAdd } from "react-icons/md";
 import { useState } from "react";
-import { toast } from "sonner";
 
-export default function CloseButton({issueNumber, setIssueClose}: {issueNumber: number, setIssueClose: (value: boolean) => void}) {
+export default function AddButton() {
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => setOpen(!open);
-  const handleIssueClose = () => {
-    CloseIssue(issueNumber);
-    setOpen(false);
-    setIssueClose(true);
-    toast.success('Issue closed successfully');
-  };
-  
+
   return (
     <Tooltip
-      content="delete article"
+      content="add new article"
     >
       <>
-        <Button 
-          placeholder=""
-          color="red"
-          className="flex items-center justify-center rounded-full gap-1 h-7"
+        <IconButton
+          placeholder
+          variant="outlined"
+          className="rounded-full"
+          color="white"
           onClick={handleOpen}
         >
-          <SlTrash size={15}/>
-          close
-        </Button>
+          <MdOutlineAdd size={40} />
+        </IconButton>
         <Dialog placeholder="" open={open} handler={handleOpen}>
           <DialogHeader placeholder="">
             <Typography placeholder="" variant="h5" color="blue-gray">
@@ -53,7 +46,6 @@ export default function CloseButton({issueNumber, setIssueClose}: {issueNumber: 
             <Button
               placeholder=""
               variant="gradient"
-              onClick={handleIssueClose}
             >
               Ok, Close it
             </Button>

@@ -8,28 +8,17 @@ import {
   Textarea,
   Typography,
 } from "@material-tailwind/react";
-import { CreateIssues } from "@/actions/create-issue";
 import { useState } from "react";
-import { toast } from "sonner";
 
-export function AddIssueDialog({ open, handleOpen }: { open: boolean; handleOpen: () => void }) {
-  const [title, setTitle] = useState('');
-  const [body, setBody] = useState('');
-
-  const handleSave = async () => {
-    if (title.trim() === '' || body.trim().length < 30) {
-      toast.error('Title is required and body must be at least 30 characters long');
-      return;
-    }
-
-    try {
-      await CreateIssues(title, body);
-      handleOpen();
-    } catch (error) {
-      toast.error('Failed to create issue');
-      console.error(error);
-    }
-  };
+export function IssueDialog(
+  { open, handleOpen, handleSave, defaultTitle = '', defaultBody = ''}: 
+  { open: boolean; handleOpen: () => void;
+    handleSave: (arg0: string, arg1: string) => void;
+    defaultTitle?: string;
+    defaultBody?: string;
+  }) {
+  const [title, setTitle] = useState(defaultTitle);
+  const [body, setBody] = useState(defaultBody);
 
   return (
     <>
@@ -38,7 +27,7 @@ export function AddIssueDialog({ open, handleOpen }: { open: boolean; handleOpen
           <DialogHeader placeholder="" className="flex flex-col items-start">
             {" "}
             <Typography placeholder="" className="mb-1" variant="h4">
-              New Issue
+              Issue
             </Typography>
           </DialogHeader>
           <svg
@@ -59,14 +48,16 @@ export function AddIssueDialog({ open, handleOpen }: { open: boolean; handleOpen
           <Typography placeholder={undefined} className="-mb-1" color="blue-gray" variant="h6">
             Title
           </Typography>
-          <Input 
+          <Input
             crossOrigin={undefined}
-            label="Title" 
+            label="Title"
+            value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
-          <Textarea 
-            label="Body" 
+          <Textarea
+            label="Body"
             className="h-full"
+            value={body}
             onChange={(e) => setBody(e.target.value)}
           />
         </DialogBody>
@@ -74,7 +65,7 @@ export function AddIssueDialog({ open, handleOpen }: { open: boolean; handleOpen
           <Button placeholder={undefined} variant="text" color="gray" onClick={handleOpen}>
             cancel
           </Button>
-          <Button placeholder={undefined} variant="gradient" color="gray" onClick={handleSave}>
+          <Button placeholder={undefined} variant="gradient" color="gray" onClick={() => handleSave(title, body)}>
             save
           </Button>
         </DialogFooter>

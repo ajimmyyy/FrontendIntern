@@ -60,6 +60,8 @@ export default function Issue() {
               <MenuList placeholder="" className="flex flex-col justify-center space-y-2">
                 <EditButton
                   issueNumber={comment.issue.number}
+                  title={comment.issue.title}
+                  body={comment.issue.body}
                 />
                 <CloseButton
                   issueNumber={comment.issue.number}

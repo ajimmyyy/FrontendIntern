@@ -5,6 +5,7 @@ import { Spinner } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import Issues from "@/components/issue/Issues";
+import { toast } from "sonner";
 
 export default function LoadMore() {
   const [issues, setIssues] = useState<IssueInfo[]>([]);

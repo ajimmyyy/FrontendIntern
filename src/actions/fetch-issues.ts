@@ -1,4 +1,5 @@
 import { IssueInfo } from "@/types/issue";
+import { toast } from "sonner";
 
 export async function FetchIssues (page: number, perPage: number = 10){
   const repoOwner = process.env.NEXT_PUBLIC_OWNER_NAME || "";

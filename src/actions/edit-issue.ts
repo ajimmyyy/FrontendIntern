@@ -1,7 +1,6 @@
 import { getSession } from "next-auth/react";
-import { IssueInfo } from "@/types/issue";
 
-export async function CreateIssues (title: string, body: string){
+export async function EditIssue(issueNumber: number, title: string, body: string) {
   const repoOwner = process.env.NEXT_PUBLIC_OWNER_NAME || "";
   const repoName = process.env.NEXT_PUBLIC_REPO_NAME || "";
 
@@ -9,9 +8,9 @@ export async function CreateIssues (title: string, body: string){
     const session = await getSession();
     const githubAccessToken = session?.user?.accessToken;
     const response = await fetch(
-      `https://api.github.com/repos/${repoOwner}/${repoName}/issues`,
+      `https://api.github.com/repos/${repoOwner}/${repoName}/issues/${issueNumber}`,
       {
-        method: "POST",
+        method: "PATCH",
         headers: {
           Accept: "application/vnd.github.v3+json",
           Authorization: `token ${githubAccessToken}`,
@@ -24,11 +23,11 @@ export async function CreateIssues (title: string, body: string){
     );
 
     if (!response.ok) {
-      throw new Error("Failed to create issue");
+      throw new Error("Failed to update issue");
     }
-    return {"success": true};
+    return { "success": true };
   } catch (error) {
-    console.error("Error creating GitHub issue:", error);
-    return {"success": false};
+    console.error("Error updating GitHub issue:", error);
+    return { "success": false };
   }
 };

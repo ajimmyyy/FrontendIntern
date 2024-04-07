@@ -6,9 +6,10 @@ export const useFetchComment = (number: string) => {
   const [issue, setIssue] = useState<IssueInfo>();
   const [comment, setComments] = useState<CommentInfo[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const [refetchKey, setRefetchKey] = useState<number>(0);
   const repoOwner = process.env.NEXT_PUBLIC_OWNER_NAME || "";
   const repoName = process.env.NEXT_PUBLIC_REPO_NAME || "";
-  
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -52,7 +53,12 @@ export const useFetchComment = (number: string) => {
     };
 
     fetchData();
-  }, [number]);
+  }, [number, refetchKey]);
 
-  return { issue, comment, loading };
+  const refetch = () => {
+    setLoading(true);
+    setRefetchKey(prevKey => prevKey + 1);
+  }
+
+  return { issue, comment, loading, refetch};
 }

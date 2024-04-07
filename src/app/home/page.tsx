@@ -10,7 +10,7 @@ import { useSession } from "next-auth/react";
 
 export default function Home() {
   const [issues, setIssues] = useState<IssueInfo[]>([]);
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
 
   useEffect(() => {
     const fetchIssues = async () => {
@@ -19,6 +19,17 @@ export default function Home() {
     };
     fetchIssues();
   }, []);
+
+  const handleAddData = (added: boolean) => {
+    if (added) {
+      fetchIssues();
+    }
+  };
+
+  const fetchIssues = async () => {
+    const newIssues = await FetchIssues(1);
+    setIssues(newIssues);
+  };
 
   return (
     <>
@@ -32,7 +43,7 @@ export default function Home() {
               color="transparent"
               className="rounded-none pb-4 text-center"
             >
-              <AddButton />
+              <AddButton onAdd={handleAddData}/>
             </CardHeader>
           </Card>
         )}

@@ -19,7 +19,7 @@ export default function Issue() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const comment = useFetchComment(searchParams.get('number') ?? '');
-  const { data: session, status } = useSession()
+  const { data: session } = useSession()
   const [closeIssue, setCloseIssue] = useState(false);
 
   useEffect(() => {
@@ -34,6 +34,12 @@ export default function Issue() {
       setCloseIssue(false);
     }
   }, [closeIssue, router]);
+
+  const handleEditSuccess = (edit: boolean) => {
+    if (edit) {
+      comment.refetch();
+    }
+  }
 
   return (
     <>
@@ -62,6 +68,7 @@ export default function Issue() {
                   issueNumber={comment.issue.number}
                   title={comment.issue.title}
                   body={comment.issue.body}
+                  onEdit={handleEditSuccess}
                 />
                 <CloseButton
                   issueNumber={comment.issue.number}

@@ -3,15 +3,16 @@ import {
   Menu,
   MenuHandler,
   MenuList,
-  Button,
+  IconButton,
 } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
 import { useSearchParams } from 'next/navigation';
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { useFetchComment } from "@/hooks/useComment";
-import CommentList from "@/components/issue/comment-list";
+import CommentList from "@/components/comment/comment-list";
 import CloseButton from "@/components/issue/close-button";
+import EditButton from "@/components/issue/edit-button";
 import { MdOutlineSettings } from "react-icons/md";
 
 export default function Issue() {
@@ -52,18 +53,19 @@ export default function Issue() {
               placement="bottom-start"
             >
               <MenuHandler>
-                <Button placeholder="" variant="text" color="blue-gray" className="rounded-full">
-                  <MdOutlineSettings size={40}/>
-                </Button>
+                <IconButton placeholder="" variant="text" color="blue-gray" className="rounded-full">
+                  <MdOutlineSettings size={40} />
+                </IconButton>
               </MenuHandler>
               <MenuList placeholder="" className="flex flex-col justify-center space-y-2">
-                <CloseButton 
-                    issueNumber={comment.issue.number}
-                    setIssueClose={setCloseIssue}
+                <EditButton
+                  issueNumber={comment.issue.number}
+                  title={comment.issue.title}
+                  body={comment.issue.body}
                 />
-                <CloseButton 
-                    issueNumber={comment.issue.number}
-                    setIssueClose={setCloseIssue}
+                <CloseButton
+                  issueNumber={comment.issue.number}
+                  setIssueClose={setCloseIssue}
                 />
               </MenuList>
             </Menu>

@@ -4,7 +4,7 @@ import {
 } from "@material-tailwind/react";
 import { IssueInfo } from "@/types/issue";
 import { CommentInfo } from "@/types/comment";
-import CommentItem from "@/components/issue/comment-item";
+import CommentItem from "@/components/comment/comment-item";
 import ReactMarkdown from "react-markdown";
 
 export default function CommentList({ issue, comments }: { issue: IssueInfo, comments: CommentInfo[] }) {

@@ -3,7 +3,7 @@ import {
   Menu,
   MenuHandler,
   MenuList,
-  Button,
+  IconButton,
 } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
 import { useSearchParams } from 'next/navigation';
@@ -53,9 +53,9 @@ export default function Issue() {
               placement="bottom-start"
             >
               <MenuHandler>
-                <Button placeholder="" variant="text" color="blue-gray" className="rounded-full">
+                <IconButton placeholder="" variant="text" color="blue-gray" className="rounded-full">
                   <MdOutlineSettings size={40} />
-                </Button>
+                </IconButton>
               </MenuHandler>
               <MenuList placeholder="" className="flex flex-col justify-center space-y-2">
                 <EditButton

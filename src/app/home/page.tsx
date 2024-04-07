@@ -6,9 +6,11 @@ import AddButton from "@/components/issue/add-button";
 import { useEffect, useState } from "react";
 import { IssueInfo } from "@/types/issue";
 import { Card, CardHeader } from "@material-tailwind/react";
+import { useSession } from "next-auth/react";
 
 export default function Home() {
   const [issues, setIssues] = useState<IssueInfo[]>([]);
+  const { data: session, status } = useSession();
 
   useEffect(() => {
     const fetchIssues = async () => {
@@ -21,18 +23,20 @@ export default function Home() {
   return (
     <>
       <div className="flex min-h-screen flex-col items-center p-2">
-        <Card placeholder="" color="blue-gray" variant="gradient" className="w-[20rem]">
-          <CardHeader
-            placeholder=""
-            floated={false}
-            shadow={false}
-            color="transparent"
-            className="rounded-none pb-4 text-center"
-          >
-            <AddButton />
-          </CardHeader>
-        </Card>
-        <Issues issues={issues}/>
+        {session && (
+          <Card placeholder="" color="blue-gray" variant="gradient" className="w-[20rem]">
+            <CardHeader
+              placeholder=""
+              floated={false}
+              shadow={false}
+              color="transparent"
+              className="rounded-none pb-4 text-center"
+            >
+              <AddButton />
+            </CardHeader>
+          </Card>
+        )}
+        <Issues issues={issues} />
         <LoadMore />
       </div>
     </>

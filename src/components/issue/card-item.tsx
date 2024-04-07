@@ -11,10 +11,12 @@ import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import ReactMarkdown from "react-markdown";
 import CloseButton from "@/components/issue/close-button";
+import { useState } from "react";
 
 export default function CardItem({ issue }: { issue: IssueInfo }) {
   const router = useRouter();
   const { data: session, status } = useSession()
+  const [closeIssue, setCloseIssue] = useState(false);
   const LIMIT_LINE_NUM = 8;
 
   function limitTextLines(text: string, limit: number) {
@@ -26,6 +28,10 @@ export default function CardItem({ issue }: { issue: IssueInfo }) {
       truncatedLines.push('...');
       return truncatedLines.join('\n');
     }
+  }
+
+  if (closeIssue) {
+    return null;
   }
 
   return (
@@ -62,7 +68,7 @@ export default function CardItem({ issue }: { issue: IssueInfo }) {
             />
           </svg>
         </Button>
-        {session && <CloseButton issueNumber={issue.number} />}
+        {session && <CloseButton issueNumber={issue.number} setIssueClose={setCloseIssue} />}
       </CardFooter>
     </Card>
   );

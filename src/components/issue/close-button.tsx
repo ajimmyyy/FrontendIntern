@@ -13,13 +13,14 @@ import { SlTrash } from "react-icons/sl";
 import { useState } from "react";
 import { toast } from "sonner";
 
-export default function CloseButton({issueNumber}: {issueNumber: number}) {
+export default function CloseButton({issueNumber, setIssueClose}: {issueNumber: number, setIssueClose: (value: boolean) => void}) {
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => setOpen(!open);
   const handleIssueClose = () => {
     CloseIssue(issueNumber);
     setOpen(false);
+    setIssueClose(true);
     toast.success('Issue closed successfully');
   };
   
@@ -31,7 +32,7 @@ export default function CloseButton({issueNumber}: {issueNumber: number}) {
         <Button 
           placeholder=""
           color="red"
-          className="flex rounded-full gap-1 w-25 h-10"
+          className="flex items-center justify-center rounded-full gap-1 h-10"
           onClick={handleOpen}
         >
           <SlTrash size={15}/>
